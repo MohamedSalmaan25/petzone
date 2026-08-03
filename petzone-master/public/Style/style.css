@@ -1,0 +1,415 @@
+/* ------------------------start slider ------------------------ */
+/* Slideshow container */
+/* Slideshow container */
+.slideshow-container {
+  max-width: 100%;
+  width: 100%;
+  height: 70vh; /* Adjust height as needed */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ensure images are fully visible without cropping */
+.mySlides img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Ensures full image is shown */
+  display: block;
+}
+
+.slide-content {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  transform: translateY(-50%);
+  color: rgb(0, 0, 0);
+  padding: 20px;
+  max-width: 40%;
+  border-radius: 5px;
+}
+
+/* Heading inside content */
+.slide-content h2 {
+  font-size: 40px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* Button */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #000000;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  background: #3e3e3e;
+}
+
+/* Hide images initially */
+.mySlides {
+  display: none;
+}
+
+/* Navigation buttons */
+.prev,
+.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 12px;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+}
+
+/* Position buttons */
+.prev {
+  left: 20px;
+}
+
+.next {
+  right: 20px;
+}
+
+/* On hover, change background */
+.prev:hover,
+.next:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* Dots (Indicators) */
+.dots-container {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.dot {
+  cursor: pointer;
+  height: 12px;
+  width: 12px;
+  margin: 5px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active,
+.dot:hover {
+  background-color: #717171;
+}
+
+/* Animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .slideshow-container {
+    height: 30vh; /* Reduce height on mobile */
+  }
+
+  .mySlides img {
+    height: 30vh; /* Reduce image height */
+    object-fit: contain; /* Ensure full image is visible */
+  }
+
+  .prev,
+  .next {
+    padding: 8px;
+    font-size: 14px;
+  }
+  .slide-content {
+    padding-left: 30px;
+  }
+  .slide-content h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  .btn {
+    display: inline-block;
+    padding: 5px 10px;
+    background: #000000;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+}
+
+/* ------------------------- info section --------------------- */
+.information {
+  width: 100%;
+  display: flex;
+  padding: 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #878787;
+}
+.info {
+  display: flex;
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+}
+.info .info-icon img {
+  width: 80px;
+  margin-right: 20px;
+}
+.info .info-text h3 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #222222;
+  margin-bottom: 4px;
+}
+.info .info-text p {
+  color: #878787;
+  font-size: 14px;
+}
+/* --------------------- trending ---------------------*/
+.top_products {
+  width: 100%;
+  min-height: 100vh;
+}
+.top_products .container {
+  padding: 4% 8%;
+}
+.top_products .header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+.top_products .header h3 {
+  font-size: 38px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.top_products .header p {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(17, 17, 17, 0.8);
+}
+.products {
+  display: grid;
+  gap: 20px;
+  padding: 16px;
+}
+
+.product-card {
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+.card-img {
+  position: relative;
+  overflow: hidden;
+}
+.card-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+  cursor: pointer;
+  transition: all 1s linear;
+}
+.card-img:hover img {
+  transform: scale(1.1);
+}
+.card-img .addToCart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+.card-img .addToCart:hover {
+  background-color: #000000dc;
+  color: #fff;
+}
+.card-info {
+  padding: 16px 0;
+}
+
+.product-name {
+  font-size: 14px;
+  font-weight: 400;
+  color: #222;
+  margin: 0 0 8px;
+}
+
+.product-price {
+  font-size: 14px;
+  font-weight: 400;
+  color: #696969;
+  margin: 0;
+}
+/* ------------------------ collection --------------------- */
+.collection {
+  padding: 60px 0;
+}
+
+.collection .container {
+  width: 100%;
+  padding-inline: 30px;
+  margin-bottom: 30px;
+}
+
+.collection-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.collection-card {
+  background-color: gray;
+  min-height: 400px;
+  padding: 40px;
+  padding-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.collection-card .card-title {
+  margin-bottom: 12px;
+}
+
+.collection-card .card-text {
+  color: #000;
+  font-size: 16px;
+  font-weight: 600;
+  margin-block-end: auto;
+}
+
+.has-before,
+.has-after {
+  position: relative;
+  z-index: 1;
+}
+
+.has-before::before,
+.has-after::after {
+  content: "";
+  position: absolute;
+}
+.hover\:shine {
+  overflow: hidden;
+}
+
+.hover\:shine .has-bg-image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  transition: 0.5s ease;
+}
+.hover\:shine:is(:hover, :focus) .has-bg-image {
+  transform: scale(1.15);
+}
+
+.hover\:shine::before {
+  top: 0;
+  left: -140%;
+  bottom: 0;
+  width: 100%;
+  background-image: linear-gradient(
+    to right,
+    transparent 50%,
+    hsl(0, 0%, 100%, 0.3) 100%
+  );
+  transform: skewX(-25deg);
+  transition: 0.5s ease;
+  z-index: 1;
+}
+
+.hover\:shine:is(:hover, :focus-within)::before {
+  animation: shine 1s ease forwards;
+}
+.btn-link {
+  color: #000;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  transition: 0.25s ease;
+}
+
+@keyframes shine {
+  0% {
+    transform: skewX(-25deg) translateX(0);
+  }
+  100% {
+    transform: skewX(-25deg) translateX(250%);
+  }
+}
+
+.has-bg-image {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+/* ------------------------ news ----------------------- */
+.news {
+  width: 100%;
+  background-color: #dbd9d9bb;
+  height: 200px;
+  padding: 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.news .news-text h4 {
+  font-size: 30px;
+  font-weight: 300;
+  margin-bottom: 8px;
+}
+.news .news-text p {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(17, 17, 17, 0.8);
+}
+.news .Subscribe-form {
+  display: flex;
+}
+.news .Subscribe-form input {
+  width: 300px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #f1f1f1;
+  color: #868686;
+}
+.news .Subscribe-form button {
+  background-color: #000;
+  color: #fff;
+  padding: 6px 20px;
+  border: none;
+  text-transform: capitalize;
+  cursor: pointer;
+}

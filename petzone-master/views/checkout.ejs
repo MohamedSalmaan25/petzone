@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f8f8;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #ffffff;
+        padding: 15px 40px;
+      }
+      .header img {
+        height: 50px;
+      }
+      .container {
+        padding: 4% 8%;
+      }
+      h1 {
+        text-align: center;
+        font-size: 40px;
+        font-weight: 300;
+        margin-bottom: 40px;
+      }
+      h2 {
+        font-size: 18px;
+        font-weight: 400;
+        margin-bottom: 24px;
+      }
+      .billing_address {
+        margin-bottom: 20px;
+      }
+      .billing_address input {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #ccc;
+      }
+      .button-group {
+        display: flex;
+        justify-content: space-between;
+      }
+      .pay-btn,
+      .cancel-btn {
+        padding: 12px 30px;
+        font-size: 16px;
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+        text-transform: uppercase;
+      }
+      .pay-btn {
+        background-color: #000;
+        color: #fff;
+      }
+      .cancel-btn {
+        background-color: red;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <img src="images/logo.png" alt="Logo" />
+    </header>
+    <div class="container">
+      <h1>Checkout</h1>
+      <h2>Complete Your Payment</h2>
+      <p>Order ID: <%= order_id %></p>
+      <p>Amount: ₹<%= amount %></p>
+
+      <form id="payment-form" action="/payment-success" method="POST">
+        <!-- Billing Address Section -->
+        <div class="billing_address">
+          <h2>Billing Address</h2>
+          <input
+            type="text"
+            name="full_name"
+            id="full_name"
+            placeholder="Full Name"
+            required
+          />
+          <input
+            type="text"
+            name="address"
+            id="address"
+            placeholder="Address"
+            required
+          />
+          <input
+            type="text"
+            name="city"
+            id="city"
+            placeholder="City"
+            required
+          />
+          <input
+            type="text"
+            name="pincode"
+            id="pincode"
+            placeholder="Pincode"
+            required
+          />
+          <input
+            type="text"
+            name="phone"
+            id="phone"
+            placeholder="Phone Number"
+            required
+          />
+        </div>
+
+        <!-- Razorpay Payment Information -->
+        <input
+          type="hidden"
+          name="razorpay_payment_id"
+          id="razorpay_payment_id"
+        />
+        <input type="hidden" name="razorpay_order_id" id="razorpay_order_id" />
+        <input
+          type="hidden"
+          name="razorpay_signature"
+          id="razorpay_signature"
+        />
+
+        <div class="button-group">
+          <button type="button" class="pay-btn" id="pay-btn">Pay Now</button>
+          <button type="button" class="cancel-btn" onclick="cancelOrder()">
+            Cancel Order
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      document.getElementById("pay-btn").addEventListener("click", function () {
+        var fullName = document.getElementById("full_name").value.trim();
+        var address = document.getElementById("address").value.trim();
+        var city = document.getElementById("city").value.trim();
+        var pincode = document.getElementById("pincode").value.trim();
+        var phone = document.getElementById("phone").value.trim();
+
+        if (!fullName || !address || !city || !pincode || !phone) {
+          alert("Please fill in all billing address fields before proceeding.");
+          return;
+        }
+
+        var options = {
+          key: "<%= process.env.RAZORPAY_KEY_ID %>", // Replace with your Razorpay Live Key ID
+          amount: "<%= amount * 100 %>", // Amount in paise (INR)
+          currency: "INR",
+          name: "Your Store",
+          description: "Payment for your order",
+          order_id: "<%= order_id %>", // Razorpay Order ID from backend
+          handler: function (response) {
+            document.getElementById("razorpay_payment_id").value =
+              response.razorpay_payment_id;
+            document.getElementById("razorpay_order_id").value =
+              response.razorpay_order_id;
+            document.getElementById("razorpay_signature").value =
+              response.razorpay_signature;
+            document.getElementById("payment-form").submit();
+          },
+          theme: {
+            color: "#3399cc",
+          },
+        };
+
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+      });
+
+      function cancelOrder() {
+        alert("Order has been cancelled.");
+        window.location.href = "/cart";
+      }
+    </script>
+  </body>
+</html>

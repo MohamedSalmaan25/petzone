@@ -1,0 +1,135 @@
+<%- include('partials/header') -%>
+
+<main class="cart_page">
+  <div class="container">
+    <h1>Shopping Cart</h1>
+    <div class="content">
+      <!-- Left Side Cart -->
+      <div class="left_side_cart">
+        <h2>
+          My Shopping cart <span id="cart_counts"><%= cart.length %></span>
+        </h2>
+        <div class="cart_products">
+          <% if (cart.length > 0) { %> <% cart.forEach(item => { %>
+          <div class="cart_product">
+            <img
+              src="<%= item.imgSrc %>"
+              alt="<%= item.name %>"
+              class="product-img"
+            />
+            <div class="cart_info">
+              <h3><%= item.name %></h3>
+              <p>₹<%= item.price %></p>
+              <p>Size: <%= item.size %></p>
+              <!-- Display selected size -->
+              <div class="quantity_controls">
+                <!-- Decrease Quantity -->
+                <form
+                  action="/update-quantity"
+                  method="POST"
+                  class="quantity_form"
+                >
+                  <input type="hidden" name="id" value="<%= item.id %>" />
+                  <input type="hidden" name="action" value="decrease" />
+                  <button type="submit" class="quantity-btn decrease-btn">
+                    -
+                  </button>
+                </form>
+                <span class="quantity"><%= item.quantity %></span>
+                <!-- Display quantity -->
+                <!-- Increase Quantity -->
+                <form
+                  action="/update-quantity"
+                  method="POST"
+                  class="quantity_form"
+                >
+                  <input type="hidden" name="id" value="<%= item.id %>" />
+                  <input type="hidden" name="action" value="increase" />
+                  <button type="submit" class="quantity-btn increase-btn">
+                    +
+                  </button>
+                </form>
+              </div>
+            </div>
+            <!-- Remove Item -->
+            <form action="/remove-from-cart" method="POST" class="remove-form">
+              <input type="hidden" name="id" value="<%= item.id %>" />
+              <button type="submit" class="delete_btn">
+                <i class="bi bi-trash" style="font-size: 20px; color: red"></i>
+              </button>
+            </form>
+          </div>
+          <button class="checkout" onclick="window.location.href='/';">
+            Browse more Products
+          </button>
+          <% }); %> <% } else { %>
+          <p>Your cart is empty.</p>
+          <button class="checkout" onclick="window.location.href='/';">
+            Browse more Products
+          </button>
+          <% } %>
+        </div>
+      </div>
+
+      <!-- Right Side Cart -->
+      <div class="right_side_cart">
+        <div class="Promotional_code">
+          <h2>Do you have a Promotional Code?</h2>
+          <form method="POST" action="/promo-code">
+            <div class="apply_code">
+              <input
+                type="text"
+                id="code"
+                name="code"
+                placeholder="Promo code"
+              />
+              <button type="submit">Apply</button>
+            </div>
+          </form>
+          <div class="promo-message">
+            <% if (locals.successMessage) { %>
+            <p style="color: green"><%= successMessage %></p>
+            <% } else if (locals.errorMessage) { %>
+            <p style="color: red"><%= errorMessage %></p>
+            <% } %>
+          </div>
+        </div>
+
+        <div class="summary">
+          <h2>Order Summary</h2>
+          <div class="summary_price">
+            <div>
+              <h4>Subtotal</h4>
+              <span id="Subtotal">₹<%= subtotal %></span>
+            </div>
+            <div class="Delivery">
+              <h4>Delivery</h4>
+              <span id="Delivery">₹<%= deliveryCharge %></span>
+            </div>
+            <div class="Total">
+              <h4>Total</h4>
+              <span id="Total">₹<%= total %></span>
+            </div>
+          </div>
+          <form action="/checkout" method="POST">
+            <button type="submit" class="checkout">Proceed to Checkout</button>
+          </form>
+          <% if (error) { %>
+          <div
+            style="
+              color: red;
+              font-weight: bold;
+              text-align: center;
+              margin-top: 10px;
+            "
+          >
+            <%= error %>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include('partials/footer') -%>

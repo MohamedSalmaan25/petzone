@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pet-zone🐾</title>
+    <!-- SEO Meta Tags -->
+    <meta
+      name="description"
+      content="Premium quality oversized t-shirt from Shadow Drift. Designed for comfort and style."
+    />
+    <meta
+      name="keywords"
+      content="Shadow Drift, oversized t-shirt, men's fashion, casual wear"
+    />
+
+    <!-- Structured Data (Schema Markup) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org/",
+        "@type": "Product",
+        "name": "Shadow Drift Oversized T-Shirt for Men",
+        "image": "https://yourstore.com/images/shadowdrift-tshirt.jpg",
+        "description": "Premium quality oversized t-shirt from Shadow Drift. Designed for comfort and style.",
+        "brand": {
+          "@type": "Brand",
+          "name": "Shadow Drift"
+        },
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "29.99",
+          "availability": "https://schema.org/InStock",
+          "url": "https://yourstore.com/products/shadow-drift-oversized-tshirt-men"
+        }
+      }
+    </script>
+    <link rel="icon" href="images/logo.png" type="image/x-icon" />
+    <!-- css -->
+    <link rel="stylesheet" href="/Style/style.css" />
+    <link rel="stylesheet" href="/Style/main.css" />
+    <link rel="stylesheet" href="/Style/login.css" />
+    <link rel="stylesheet" href="/Style/productDetails.css" />
+    <link rel="stylesheet" href="/Style/cartPage.css" />
+
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- icon -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+    />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+  </head>
+  <body>
+    <header class="container" id="header">
+      <div class="header_top">
+        <div class="header_social">
+          <a href="#" target="_blank">
+            <i
+              class="bi bi-instagram"
+              style="font-size: 20px; color: rgb(0, 0, 0)"
+            ></i>
+          </a>
+          <a href="#" target="_blank">
+            <i
+              class="bi bi-facebook"
+              style="font-size: 20px; color: rgb(0, 0, 0)"
+            ></i>
+          </a>
+          <a href="#" target="_blank">
+            <i
+              class="bi bi-whatsapp"
+              style="font-size: 20px; color: rgb(0, 0, 0)"
+            ></i>
+          </a>
+        </div>
+        <img src="/images/logo.png" alt="page logo" id="logo" />
+        <div class="header_actions">
+          <div id="display_login">
+            <% if (user) { %>
+            <!-- If logged in, show profile -->
+            <a href="/profile" id="user-profile-link">
+              <div id="user-initial" class="user-initial">
+                <span
+                  ><%= user.name ? user.name.charAt(0).toUpperCase() : "U"
+                  %></span
+                >
+              </div>
+            </a>
+            <!-- <a href="/logout" id="logout">
+              <span id="signout">Sign Out</span>
+              <ion-icon name="log-out-outline"></ion-icon>
+            </a> -->
+            <% } else { %>
+            <!-- If not logged in, show login icon -->
+            <a href="/login" title="Login" id="login_btn">
+              <i
+                class="fas fa-user"
+                style="font-size: 20px; color: rgb(0, 0, 0)"
+              ></i>
+            </a>
+            <% } %>
+          </div>
+
+          <a href="/cart" class="icon-cart">
+            <i
+              class="bi bi-cart"
+              style="font-size: 20px; color: rgb(0, 0, 0)"
+            ></i>
+            <!-- <span id="cart-counter">0</span> -->
+          </a>
+        </div>
+      </div>
+      <nav id="navbar">
+        <menu>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/product">Shop</a></li>
+            <li><a href="/">Contact</a></li>
+          </ul>
+        </menu>
+      </nav>
+    </header>
+    <button id="scrollBtn">
+      <ion-icon name="arrow-up-outline" id="btn-up"></ion-icon>
+    </button>
+  </body>
+</html>

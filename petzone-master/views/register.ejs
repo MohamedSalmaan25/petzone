@@ -1,0 +1,76 @@
+<%- include('partials/header') -%>
+
+<section id="login">
+  <div class="container">
+    <h1 class="section-header">Sign up</h1>
+
+    <div id="form">
+      <form action="/register" method="POST">
+        <label for="name">Full Name</label>
+        <input
+          type="text"
+          name="name"
+          placeholder="Full Name"
+          id="name"
+          required
+        />
+
+        <label for="email">Email</label>
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          id="email"
+          required
+        />
+        <span id="invalidEmail" class="alert">Email is not valid</span>
+
+        <label for="mobile">Mobile Number</label>
+        <input
+          type="text"
+          name="mobile"
+          placeholder="Mobile Number"
+          id="mobile"
+          required
+        />
+
+        <label for="password">Password</label>
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          id="password"
+          required
+        />
+        <span id="invalidPass" class="alert"
+          >Password must be 8 chars at least</span
+        >
+
+        <label for="confirmPassword">Confirm Password</label>
+        <input
+          type="password"
+          name="confirmPassword"
+          placeholder="Confirm Password"
+          id="confirmPassword"
+          required
+        />
+        <span id="invalidConfirmPass" class="alert">Password Not Match</span>
+        <% if (locals.errorMessage) { %>
+        <p style="color: red; text-align: center"><%= locals.errorMessage %></p>
+        <% } %>
+
+        <div class="submit">
+          <input
+            id="btn-login"
+            style="background-color: black; color: white; width: 150px"
+            type="submit"
+            value="Sign Up"
+          />
+          <a href="/login" id="signup">Already have an account? Login here</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') -%>

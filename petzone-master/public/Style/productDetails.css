@@ -1,0 +1,274 @@
+/* General layout */
+
+.product-detail-container {
+  padding: 20%;
+  margin: 20%;
+}
+
+.product-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 50px;
+  padding: 0 10%;
+}
+
+.product-detail-grid .product-image img {
+  width: 100%;
+  height: 80vh;
+}
+
+/* For multiple images */
+.product-detail-grid .product-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.product-detail-grid .product-images img {
+  width: 32%; /* Adjust to fit 3 images in one row */
+  height: auto;
+}
+
+.product-detail-grid .product-info .category-name {
+  font-size: 14px;
+  color: #868686;
+  margin-bottom: 6px;
+}
+
+.product-detail-grid .product-info .product-name {
+  font-size: px;
+  font-weight: 400;
+  color: #000;
+  margin-bottom: 12px;
+}
+
+.product-detail-grid .product-info .product-price {
+  font-size: 20px;
+  font-weight: 400;
+  color: #000;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.product-detail-grid .product-info .product-price::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #86868694;
+}
+
+.product-detail-grid .product-description {
+  font-size: 16px;
+  color: #868686;
+  margin: 20px 0;
+}
+
+.product-detail-grid .product-buttons {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 100%;
+}
+
+.product-detail-grid .product-buttons .count-container {
+  min-width: 140px;
+  width: 140px;
+  height: 55px;
+  border: 2px solid rgb(134 134 134 / 50%);
+  text-align: center;
+  display: inline-block;
+  position: relative;
+  margin-right: 20px;
+  touch-action: manipulation;
+}
+
+.count-button {
+  position: absolute;
+  display: block;
+  padding: 0;
+  top: 0;
+  width: 30px;
+  height: 51px;
+  border: 0;
+  background: 0 0;
+  color: rgb(134 134 134 / 50%);
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+#minus-button {
+  left: 0;
+  text-align: left;
+  padding-left: 15px;
+}
+
+#plus-button {
+  right: 0;
+  text-align: right;
+  padding-right: 15px;
+}
+
+.product-count-input {
+  width: 35px;
+  border: 0px;
+  height: 51px;
+  background: 0px 0px;
+  padding: 0;
+  font-weight: 500;
+  font-size: 18px;
+  color: #000;
+  text-align: center;
+}
+
+.product-count-input:focus {
+  outline: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.add-to-cart-button {
+  background-color: #000;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 400;
+  min-height: 55px;
+  min-width: 55px;
+  width: 70%;
+  text-transform: uppercase;
+  border: none;
+  padding: 5px 25px;
+  cursor: pointer;
+}
+
+.toast-overlay {
+  position: absolute;
+  top: -1000px;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.toast-overlay.show {
+  top: 0;
+}
+
+.success-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #000;
+  padding: 24px 50px;
+}
+
+.success-message ion-icon {
+  font-size: 48px;
+  color: green;
+  margin-bottom: 24px;
+}
+
+.success-message h4 {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* Responsive Layout for Small Screens */
+/* @media (max-width: 768px) {
+  .product-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-detail-grid .product-image {
+    order: 1;
+  }
+
+  .product-detail-grid .product-info {
+    order: 2;
+  }
+
+  .product-detail-grid .product-image {
+    margin-bottom: 20px;
+  }
+
+  .product-detail-grid .product-info {
+    margin-top: 20px;
+  }
+
+  .product-detail-grid .product-buttons .count-container {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .product-detail-grid .product-buttons {
+    flex-direction: column;
+  }
+
+  .add-to-cart-button {
+    width: 100%;
+  }
+
+  .product-detail-grid .product-images img {
+    width: 100%;
+  }
+} */
+
+/* Responsive Layout for Small Screens */
+@media (max-width: 768px) {
+  .product-detail-grid {
+    grid-template-columns: 1fr; /* Single column layout */
+  }
+
+  /* Stack the product image above the details */
+  .product-detail-grid .product-image {
+    order: 1; /* Ensure images are on top */
+    max-height: 60vh; /* Adjusted container height */
+    overflow: hidden; /* Prevent overflow */
+  }
+
+  .product-detail-grid .product-info {
+    order: 2; /* Ensure details are below the images */
+    margin-top: 20px;
+  }
+
+  /* Adjust button and count container for smaller screens */
+  .product-detail-grid .product-buttons .count-container {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .product-detail-grid .product-buttons {
+    flex-direction: column; /* Stack buttons vertically */
+  }
+
+  .add-to-cart-button {
+    width: 100%; /* Full width for add to cart button */
+  }
+  .product-detail-grid {
+    gap: 10px;
+  }
+  /* Ensure images are fully visible */
+  .product-detail-grid .product-images img {
+    display: block; /* Ensure no inline elements affect layout */
+    width: 100%; /* Full width for the container */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Show the full image without cropping */
+  }
+}

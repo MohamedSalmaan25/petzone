@@ -1,0 +1,170 @@
+<%- include('partials/header') -%>
+<div class="slideshow-container">
+  <!-- Slide 1 -->
+  <div class="mySlides fade">
+    <img src="images/background/slider3.jpg" alt="Slide 1" />
+    <div class="slide-content">
+      <h2>love your pets</h2>
+
+      <a href="/product" class="btn">Shop Now</a>
+    </div>
+  </div>
+
+  <!-- Slide 2 -->
+  <div class="mySlides fade">
+    <img src="images/background/slider1.png" alt="Slide 2" />
+    <div class="slide-content">
+      <h2></h2>
+
+      <a href="/views/productDetails.ejs" class="btn">Shop Now</a>
+    </div>
+  </div>
+
+  <!-- Slide 3 -->
+  <div class="mySlides fade">
+    <img src="images/background/slider2.png" alt="Slide 3" />
+    <div class="slide-content">
+      <h2>Care your pets</h2>
+
+      <a href="#" class="btn">Shop Now</a>
+    </div>
+  </div>
+
+  <!-- Navigation buttons -->
+  <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
+  <button class="next" onclick="plusSlides(1)">&#10095;</button>
+</div>
+
+<!-- Dots (Indicators) -->
+<div class="dots-container">
+  <span class="dot" onclick="currentSlide(1)"></span>
+  <span class="dot" onclick="currentSlide(2)"></span>
+  <span class="dot" onclick="currentSlide(3)"></span>
+</div>
+
+<!-- info -->
+<div class="information">
+  <div class="info">
+    <div class="info-icon">
+      <img src="images/global-distribution.png" alt="global-distribution" />
+    </div>
+    <div class="info-text">
+      <h3>Shipping Worldwide</h3>
+      <p>Free shipping on all orders above ₹1000</p>
+    </div>
+  </div>
+  <div class="info">
+    <div class="info-icon">
+      <img src="images/delivery-status.png" alt="delivery-status" />
+    </div>
+    <div class="info-text">
+      <h3>14 Days Return</h3>
+      <p>Simply return it within 30 days for an exchange.</p>
+    </div>
+  </div>
+  <div class="info">
+    <div class="info-icon">
+      <img src="images/check.png" alt="Security" />
+    </div>
+    <div class="info-text">
+      <h3>Security Payment</h3>
+      <p>We ensure secure payment with PEV</p>
+    </div>
+  </div>
+  <div class="info">
+    <div class="info-icon">
+      <img src="images/24-hours-support.png" alt="24-hours-support" />
+    </div>
+    <div class="info-text">
+      <h3>24/7 Support</h3>
+      <p>Contact us 24 hours a day, 7 days a week</p>
+    </div>
+  </div>
+</div>
+
+<!-- Top Products -->
+<div class="top_products">
+  <div class="container">
+    <div class="header">
+      <h3>Trending Products</h3>
+      <p>
+        Hey Petholders!! get the good quality and affordable pet products here..
+      </p>
+    </div>
+    <div class="products">
+      <% if (products.length > 0) { %> <% products.forEach(product => { %>
+      <div class="product-card">
+        <div class="card-img">
+          <img src="<%= product.imageurl %>" alt="<%= product.name %>" />
+        </div>
+        <div class="card-info">
+          <h3 class="product-name"><%= product.name %></h3>
+          <h3 class="product-price">₹<%= product.price %></h3>
+
+          <!-- View Button -->
+          <div class="view">
+            <a href="/product/<%= product.id %>">
+              <button class="viewCart">Buy now</button>
+            </a>
+          </div>
+
+          <!-- Add to Cart Form -->
+          <form action="/add-to-cart" method="POST">
+            <input type="hidden" name="id" value="<%= product.id %>" />
+            <input type="hidden" name="name" value="<%= product.name %>" />
+            <input type="hidden" name="price" value="<%= product.price %>" />
+            <input
+              type="hidden"
+              name="imgSrc"
+              value="<%= product.imageurl %>"
+            />
+          </form>
+        </div>
+      </div>
+      <% }); %> <% } else { %>
+      <div style="justify-content: center; text-align: center">
+        <h3>Products will be launched soon!</h3>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+<script>
+  let slideIndex = 1;
+  showSlides(slideIndex);
+
+  // Next/previous controls
+  function plusSlides(n) {
+    showSlides((slideIndex += n));
+  }
+
+  // Thumbnail image controls
+  function currentSlide(n) {
+    showSlides((slideIndex = n));
+  }
+
+  function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {
+      slideIndex = 1;
+    }
+    if (n < 1) {
+      slideIndex = slides.length;
+    }
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].className += " active";
+  }
+</script>
+
+<script src="/JavaScript/index.js"></script>
+<script src="/JavaScript/main.js"></script>
+<script src="/JavaScript/cart.js"></script>
+<%- include('partials/footer') -%>

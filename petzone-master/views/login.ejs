@@ -1,0 +1,81 @@
+<%- include('partials/header') -%>
+
+<section id="login">
+  <div class="container">
+    <h1 class="section-header">Sign In</h1>
+    <div id="form">
+      <% if (locals.errorMessage) { %>
+      <p style="color: red"><%= locals.errorMessage %></p>
+      <% } %>
+      <form action="/login" method="POST">
+        <label for="email">Email</label>
+        <input
+          type="text"
+          name="email"
+          placeholder="Email"
+          id="email"
+          required
+        />
+
+        <label for="password">Password</label>
+        <div style="position: relative; display: flex; align-items: center">
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            id="password"
+            required
+            style="flex: 1; padding-right: 40px"
+          />
+          <i
+            id="togglePassword"
+            class="bi bi-eye"
+            style="position: absolute; right: 10px; cursor: pointer"
+          ></i>
+        </div>
+
+        <div class="submit">
+          <input
+            id="btn-login"
+            style="background-color: black; color: white; width: 150px"
+            type="submit"
+            value="Sign In"
+          />
+          <% if (locals.error) { %>
+          <div style="color: red; text-align: center; margin-top: 10px">
+            <%= error %>
+          </div>
+          <% } %>
+          <a href="/forgetpassword" id="signup">Forgot password?</a>
+          <a href="/register" id="signup"
+            >New customer? Sign up for an account</a
+          >
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<button id="scrollBtn">
+  <ion-icon name="arrow-up-outline" id="btn-up"></ion-icon>
+</button>
+
+<script>
+  document
+    .getElementById("togglePassword")
+    .addEventListener("click", function () {
+      let passwordInput = document.getElementById("password");
+
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        this.classList.remove("bi-eye");
+        this.classList.add("bi-eye-slash"); // Change to eye-slash icon
+      } else {
+        passwordInput.type = "password";
+        this.classList.remove("bi-eye-slash");
+        this.classList.add("bi-eye"); // Change back to eye icon
+      }
+    });
+</script>
+
+<%- include('partials/footer') -%>

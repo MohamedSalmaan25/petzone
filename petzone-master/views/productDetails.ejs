@@ -1,0 +1,215 @@
+<%- include('partials/header') -%>
+<div class="product-detail-grid">
+  <div class="product-image">
+    <!-- Image Slider -->
+    <div class="image-slider">
+      <button id="prev-btn" class="slider-btn">&#10094;</button>
+      <div class="main-image">
+        <img
+          id="product_image"
+          src="/<%= product.imageurl %>"
+          alt="Main Product Image"
+        />
+      </div>
+      <button id="next-btn" class="slider-btn">&#10095;</button>
+    </div>
+  </div>
+
+  <div class="product-info">
+    <span class="category-name"><%= product.category %></span>
+    <h2 class="product-name"><%= product.name %></h2>
+    <h3 class="product-price">$<%= product.price %></h3>
+    <p class="product-description"><%= product.description %></p>
+
+    <!-- Hidden fields to pass product details -->
+    <form action="/add-to-cart" method="POST">
+      <input type="hidden" name="id" value="<%= product.id %>" />
+      <input type="hidden" name="name" value="<%= product.name %>" />
+      <input type="hidden" name="price" value="<%= product.price %>" />
+      <input type="hidden" name="imgSrc" value="<%= product.imageurl %>" />
+
+      <!-- Size Selection -->
+      <div class="count-container">
+        <label for="size" class="count-label">Select Size:</label>
+        <select name="size" id="size" class="product-count-input" required>
+          <% sizes.forEach(function(size) { %>
+          <option value="<%= size %>"><%= size %></option>
+          <% }); %>
+        </select>
+      </div>
+
+      <button type="submit" class="add-to-cart-button">Add To Cart</button>
+    </form>
+  </div>
+</div>
+
+<!-- JavaScript to handle image change and slider navigation -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let images = ["<%= product.imageurl %>"];
+    <% if (product.img2) { %> images.push("<%= product.img2 %>"); <% } %>
+    <% if (product.img3) { %> images.push("<%= product.img3 %>"); <% } %>
+    <% if (product.img4) { %> images.push("<%= product.img4 %>"); <% } %>
+
+    let currentIndex = 0;
+    const productImage = document.getElementById("product_image");
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+
+    function updateImage() {
+      productImage.src = "/" + images[currentIndex];
+    }
+
+    prevBtn.addEventListener("click", function () {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      updateImage();
+    });
+
+    nextBtn.addEventListener("click", function () {
+      currentIndex = (currentIndex + 1) % images.length;
+      updateImage();
+    });
+  });
+
+  // Function to change image when thumbnail is clicked
+  function changeImage(imageUrl) {
+    document.getElementById('product_image').src = "/" + imageUrl;
+  }
+</script>
+
+<%- include('partials/footer') -%>
+
+<style>
+  .product-detail-grid {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .product-image {
+    width: 45%;
+    position: relative;
+  }
+
+  .image-slider {
+    position: relative;
+  }
+
+  .slider-btn {
+    position: absolute;
+    top: 50%;
+    font-size: 24px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+  }
+
+  #prev-btn {
+    left: 0;
+    transform: translateY(-50%);
+  }
+
+  #next-btn {
+    right: 0;
+    transform: translateY(-50%);
+  }
+
+  .main-image img {
+    width: 100%;
+  }
+
+  .slider-thumbnails {
+    display: flex;
+    margin-top: 10px;
+    justify-content: space-between;
+  }
+
+  .thumbnail {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .thumbnail:hover {
+    opacity: 0.7;
+  }
+
+  .product-info {
+    width: 50%;
+  }
+
+  /* Media Query for Smaller Screens */
+  @media (max-width: 768px) {
+    .product-detail-grid {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .product-image {
+      width: 100%; /* Adjusting for smaller screens */
+      margin-bottom: 10px; /* Space between image and product info */
+    }
+
+    .product-info {
+      width: 100%; /* Taking full width for smaller screens */
+    }
+
+    .slider-btn {
+      font-size: 20px; /* Smaller button size */
+      padding: 8px; /* Smaller button padding */
+    }
+
+    .main-image img {
+      width: 100%; /* Ensuring image is responsive */
+    }
+
+    .slider-thumbnails {
+      justify-content: center;
+      margin-top: 15px;
+    }
+
+    .thumbnail {
+      width: 50px;
+      height: 40px;
+    }
+
+    .product-name,
+    .product-price {
+      font-size: 18px; /* Adjust text size for smaller screens */
+    }
+
+    .product-description {
+      font-size: 14px; /* Smaller font for description */
+    }
+  }
+
+  /* Media Query for Very Small Screens */
+  @media (max-width: 480px) {
+    .slider-btn {
+      font-size: 18px; /* Further reduce button size */
+      padding: 6px; /* Further reduce padding */
+    }
+
+    .main-image img {
+      width: 90%; /* Ensure image is even more responsive */
+    }
+
+    .product-name,
+    .product-price {
+      font-size: 16px; /* Reduce font size for smaller screens */
+    }
+
+    .product-description {
+      font-size: 12px; /* Further reduce description font size */
+    }
+
+    .thumbnail {
+      width: 40px;
+      height: 40px; /* Even smaller thumbnails for tiny screens */
+    }
+  }
+</style>
