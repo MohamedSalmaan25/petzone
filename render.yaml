@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: petzone
+    runtime: node
+    rootDir: petzone-master
+    buildCommand: npm install
+    startCommand: node index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
